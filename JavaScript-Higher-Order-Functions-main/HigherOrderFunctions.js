@@ -146,3 +146,5 @@ console.log("map()    -> Creates a NEW transformed array.");
 console.log("filter() -> Returns elements satisfying a condition.");
 console.log("reduce() -> Converts the array into one value.");
 console.log("sort()   -> Rearranges the array.");
+
+
