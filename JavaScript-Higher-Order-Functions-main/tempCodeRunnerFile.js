@@ -1,148 +1,168 @@
-// Array of Student Objects
+// Student Management System
+
 const students = [
-    { name: "Ekta", marks: 90 },
-    { name: "Rahul", marks: 75 },
-    { name: "Aman", marks: 85 },
-    { name: "Priya", marks: 60 }
+    { id: 101, name: "Aman", marks: 82, course: "Java" },
+    { id: 102, name: "Priya", marks: 95, course: "Python" },
+    { id: 103, name: "Rahul", marks: 67, course: "Java" },
+    { id: 104, name: "Neha", marks: 76, course: "Web" },
+    { id: 105, name: "Rohan", marks: 88, course: "Python" }
 ];
 
-console.log("Original Student Data:");
+console.log("Original Student List:");
 console.log(students);
 
+// ----------------------------------------------------
+// Task 1 : push()
+// ----------------------------------------------------
 
-// 1. map()
+console.log("\n===== Task 1 : push() =====");
 
-console.log("\n========== map() ==========");
-
-// map() creates a NEW array by transforming each element.
-
-const names = students.map((student) => {
-    return student.name;
+students.push({
+    id: 106,
+    name: "Simran",
+    marks: 91,
+    course: "Java"
 });
 
-console.log("Student Names:");
-console.log(names);
+console.log(students);
 
-/*
-Output: ['Ekta', 'Rahul', 'Aman', 'Priya']
-*/
+// ----------------------------------------------------
+// Task 2 : pop()
+// ----------------------------------------------------
 
+console.log("\n===== Task 2 : pop() =====");
 
-// 2. filter()
-console.log("\n========== filter() ==========");
+let removedLast = students.pop();
 
-// filter() returns only those elements
-// that satisfy the given condition.
+console.log("Removed Student:");
+console.log(removedLast);
 
-const toppers = students.filter((student) => {
-    return student.marks > 80;
+// ----------------------------------------------------
+// Task 3 : unshift()
+// ----------------------------------------------------
+
+console.log("\n===== Task 3 : unshift() =====");
+
+students.unshift({
+    id: 100,
+    name: "Ankit",
+    marks: 80,
+    course: "Web"
 });
 
-console.log("Students Scoring More Than 80:");
-console.log(toppers);
+console.log(students);
 
-/*
-Output:
-[
- { name: 'Ekta', marks: 90 },
- { name: 'Aman', marks: 85 }
-]
-*/
+// ----------------------------------------------------
+// Task 4 : shift()
+// ----------------------------------------------------
 
+console.log("\n===== Task 4 : shift() =====");
 
-// 3. reduce()
-console.log("\n========== reduce() ==========");
+let removedFirst = students.shift();
 
-// reduce() converts the whole array
-// into a single value.
+console.log("Removed Student:");
+console.log(removedFirst);
 
-const totalMarks = students.reduce((sum, student) => {
-    return sum + student.marks;
+// ----------------------------------------------------
+// Task 5 : splice()
+// ----------------------------------------------------
+
+console.log("\n===== Task 5 : splice() =====");
+
+let index = students.findIndex(student => student.id === 103);
+
+students.splice(index, 1, {
+    id: 107,
+    name: "Karan",
+    marks: 78,
+    course: "Java"
+});
+
+console.log(students);
+
+// ----------------------------------------------------
+// Task 6 : slice()
+// ----------------------------------------------------
+
+console.log("\n===== Task 6 : slice() =====");
+
+const firstThree = students.slice(0, 3);
+
+console.log(firstThree);
+
+// ----------------------------------------------------
+// Task 7 : for...of
+// ----------------------------------------------------
+
+console.log("\n===== Task 7 : for...of =====");
+
+for (let student of students) {
+    console.log(`${student.name} - ${student.course} - ${student.marks}`);
+}
+
+// ----------------------------------------------------
+// Task 8 : forEach()
+// ----------------------------------------------------
+
+console.log("\n===== Task 8 : forEach() =====");
+
+students.forEach(function(student) {
+    console.log(student.name);
+});
+
+// ----------------------------------------------------
+// Task 9 : map()
+// ----------------------------------------------------
+
+console.log("\n===== Task 9 : map() =====");
+
+const studentNames = students.map(student => student.name);
+
+console.log(studentNames);
+
+// ----------------------------------------------------
+// Task 10 : filter()
+// ----------------------------------------------------
+
+console.log("\n===== Task 10 : filter() =====");
+
+const highScorers = students.filter(student => student.marks >= 80);
+
+console.log(highScorers);
+
+// ----------------------------------------------------
+// Task 11 : reduce()
+// ----------------------------------------------------
+
+console.log("\n===== Task 11 : reduce() =====");
+
+const totalMarks = students.reduce(function(total, student) {
+    return total + student.marks;
 }, 0);
 
-console.log("Total Marks:");
-console.log(totalMarks);
+const averageMarks = totalMarks / students.length;
 
-/*
-Dry Run
+console.log("Total Marks =", totalMarks);
+console.log("Average Marks =", averageMarks);
 
-Initial sum = 0
+// ----------------------------------------------------
+// Task 12 : sort()
+// ----------------------------------------------------
 
-Student 1
-sum = 0
-marks = 90
-0 + 90 = 90
+console.log("\n===== Task 12 : sort() =====");
 
-Student 2
-sum = 90
-marks = 75
-90 + 75 = 165
+// Ascending
+let ascending = [...students];
 
-Student 3
-sum = 165
-marks = 85
-165 + 85 = 250
+ascending.sort((a, b) => a.marks - b.marks);
 
-Student 4
-sum = 250
-marks = 60
-250 + 60 = 310
+console.log("Ascending Order:");
+ascending.forEach(student => console.log(student.marks));
 
-Final Answer = 310
-*/
+// Descending
+let descending = [...students];
 
+descending.sort((a, b) => b.marks - a.marks);
 
-// 4. sort()
-
-console.log("\n========== sort() ==========");
-
-// Sort students in descending order of marks
-
-students.sort((a, b) => {
-    return b.marks - a.marks;
-});
-
-console.log("Students Sorted by Marks (Highest to Lowest):");
-console.log(students);
-
-/*
-Comparison Examples
-
-Ekta(90) vs Rahul(75)
-
-75 - 90 = -15
-Negative
-=> Ekta stays before Rahul
-
-
-Aman(85) vs Rahul(75)
-
-75 - 85 = -10
-Negative
-=> Aman stays before Rahul
-
-
-Priya(60) vs Aman(85)
-
-85 - 60 = 25
-Positive
-=> Aman comes before Priya
-
-
-Final Sorted Order
-
-Ekta   90
-Aman   85
-Rahul  75
-Priya  60
-*/
-
-
-// Summary
-
-console.log("\n========== Summary ==========");
-
-console.log("map()    -> Creates a NEW transformed array.");
-console.log("filter() -> Returns elements satisfying a condition.");
-console.log("reduce() -> Converts the array into one value.");
-console.log("sort()   -> Rearranges the array.");
+console.log("\nDescending Order:");
+descending.forEach(student => console.log(student.marks));
